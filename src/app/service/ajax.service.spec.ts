@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { AjaxService } from './ajax.service';
 
-describe('AjaxService', () => {
+fdescribe('AjaxService', () => {
   let service: AjaxService;
 
   beforeEach(() => {

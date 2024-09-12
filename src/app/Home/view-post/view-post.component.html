@@ -1,1 +1,24 @@
-<p>view-post works!</p>
+<div class="row">
+    <div class="col-md-3">
+        <img [src]="postDetail.ImageUrl" alt="" class="img-fluid rounded">
+    </div>
+    <div class="col-md-9">
+        <h1>{{postDetail.Title}}</h1>
+        <div class="row">
+            <div class="col-md-4">
+                <label class="form-label text-muted fw-bold">AUTHOR</label>
+                <p class="mb-0">{{postDetail.Author}}</p>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label text-muted fw-bold">SITE NAME</label>
+                <p class="mb-0">
+                    <a [href]="postDetail.SiteUrl" target="_blank" class="text-decoration-underline">{{postDetail.SiteName}}</a>
+                </p>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label text-muted fw-bold">DATE</label>
+                <p class="mb-0">{{postDetail.Date | date}}</p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+.ql-editor table {
+    border-collapse: collapse;
+  }
+  
+  .ql-container.ql-snow {
+    min-height: 40rem !important;
+  }
+  
+  .ql-snow .ql-picker-options .ql-picker-item {
+    font-family: #{attr(data-value)};
+    &::before {
+      content: attr(data-value) !important;
+    }
+  }
+  
+  .ql-snow .ql-picker.ql-font .ql-picker-label::before,
+  .ql-snow .ql-picker.ql-font .ql-picker-item::before {
+    content: attr(data-value) !important;
+  }
+  

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { BlogCardComponent } from '../blog-card/blog-card.component';
 import { ScrollTopButtonComponent } from '../scroll-top-button/scroll-top-button.component';
 import { AjaxService, ResponseModel } from '../../service/ajax.service';
@@ -99,9 +99,46 @@ export class HomeComponent implements OnInit  {
   //     Designation: "Backend Developer"
   //   }
   // ];
-
   RecentBlogs: Array<Blog> = [];
+  photo: string | null = null;  // To store captured photo
+  stream: MediaStream | null = null;
+  isCameraOpen = false;
+  @ViewChild('videoElement') videoElement!: ElementRef;
+  
   constructor(private http: AjaxService) {}
+
+  // Open the camera and display the video feed
+  openCamera() {
+    this.isCameraOpen = true;
+    navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => {
+      this.stream = stream;
+      const video = this.videoElement.nativeElement;
+      video.srcObject = stream;
+      video.play();
+    }).catch((err) => {
+      console.error("Error accessing camera: ", err);
+    });
+  }
+
+  // Capture the photo from the video feed
+  capturePhoto() {
+    const video = this.videoElement.nativeElement;
+    const canvas = document.createElement('canvas');
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    const context = canvas.getContext('2d');
+    
+    if (context) {
+      context.drawImage(video, 0, 0, canvas.width, canvas.height);
+      this.photo = canvas.toDataURL('image/png');
+    }
+
+    // Stop the video stream after capturing the image
+    if (this.stream) {
+      this.stream.getTracks().forEach(track => track.stop());
+      this.isCameraOpen = false;
+    }
+  }
 
   ngOnInit () {
     this.isPageReady = false;
@@ -114,11 +151,9 @@ export class HomeComponent implements OnInit  {
       },
       error: err => {
         console.error(err);
-      }
+      }                                       
     })
   }
-
-
 
 
 }

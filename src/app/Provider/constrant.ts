@@ -2,6 +2,7 @@ export const Home = "home";
 export const Videos = "videos";
 export const Books = "books";
 export const ViewBooks = "viewbooks";
+export const ViewPost = "viewpost";
 
 
 export enum VideoType {

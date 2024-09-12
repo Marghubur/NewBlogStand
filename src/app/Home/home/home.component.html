@@ -1,6 +1,24 @@
 <div class="blog_main_title border-bottom border-top border-3 border-dark mt-4">
     THE BLOG
 </div>
+<button type="button" (click)="openCamera()">Open Camera</button>
+
+  <!-- Camera video preview -->
+   @if (isCameraOpen) {
+       <div >
+         <video #videoElement autoplay></video>
+         <button type="button" (click)="capturePhoto()">Capture Photo</button>
+       </div>
+   }
+
+  <!-- Captured photo preview -->
+   @if (photo) {
+       <div >
+         <h3>Captured Photo</h3>
+         <img [src]="photo" alt="Captured Photo" width="200">
+       </div>
+   }
+
 <div class="fs-24 fw-bold mt-4 py-3">
     Recent blog posts
 </div>
